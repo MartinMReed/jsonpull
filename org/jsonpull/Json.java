@@ -90,8 +90,7 @@ public class Json extends JsonBase {
   public String getStringValue(String key) throws FormatException, SyntaxException {
     eat('{');
     if (seekInObject(key)) {
-      eat(Json.STRING);
-      return getString();
+      return getStringValue();
     } else {
       return null;
     }
