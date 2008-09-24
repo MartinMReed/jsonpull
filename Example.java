@@ -14,9 +14,9 @@
  * limitations under the License.
  */
 
-import com.google.jsonpull.Json;
-import com.google.jsonpull.FormatException;
-import com.google.jsonpull.SyntaxException;
+import org.jsonpull.Json;
+import org.jsonpull.FormatException;
+import org.jsonpull.SyntaxException;
 
 import java.util.Enumeration;
 
