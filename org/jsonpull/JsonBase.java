@@ -96,9 +96,9 @@ public class JsonBase {
                 c = textChars[pos++];
             }
             switch (c) {
-            case END_OBJECT: {
+            case END_ARRAY: {
                 popState();
-                return END_OBJECT;            
+                return END_ARRAY;            
             }
                 
             case '"': {

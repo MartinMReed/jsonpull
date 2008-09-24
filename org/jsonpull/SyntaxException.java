@@ -20,7 +20,7 @@ package org.jsonpull;
  * Invalid JSON syntax. E.g. {"foo"}
  */
 public class SyntaxException extends Exception {
-  SyntaxException(String detail) {
-    super(detail);
-  }
+    SyntaxException(String detail) {
+        super(detail);
+    }
 }

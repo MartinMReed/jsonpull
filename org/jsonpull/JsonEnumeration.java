@@ -17,32 +17,32 @@
 package org.jsonpull;
 
 class JsonEnumeration implements java.util.Enumeration {
-  private Json parser;
-  private int terminator;
-  private int level;
+    private Json parser;
+    private int terminator;
+    private int level;
 
-  JsonEnumeration(Json parser, int level, int terminator) {
-    this.parser     = parser;
-    this.level      = level;
-    this.terminator = terminator;
-  }
-
-  public boolean hasMoreElements() {
-    //int event = parser.next(level);
-    //return event != terminator;
-
-    parser.seekLevel(level);
-    boolean hasMore = parser.peekNext() != terminator;
-    if (!hasMore) {
-      parser.next();
+    JsonEnumeration(Json parser, int level, int terminator) {
+        this.parser     = parser;
+        this.level      = level;
+        this.terminator = terminator;
     }
-    return hasMore;
-  }
 
-  /**
-   * Only neeed to conform to Enumeration interface, otherwise not useful.
-   */
-  public Object nextElement() {
-    return new Integer(parser.next());
-  }
+    public boolean hasMoreElements() {
+        //int event = parser.next(level);
+        //return event != terminator;
+        
+        parser.seekLevel(level);
+        boolean hasMore = parser.peekNext() != terminator;
+        if (!hasMore) {
+            parser.next();
+        }
+        return hasMore;
+    }
+
+    /**
+     * Only neeed to conform to Enumeration interface, otherwise not useful.
+     */
+    public Object nextElement() {
+        return new Integer(parser.next());
+    }
 }
