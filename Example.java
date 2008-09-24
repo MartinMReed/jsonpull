@@ -24,47 +24,47 @@ import java.util.Enumeration;
  * Json-pull usage example.
  */
 public class Example {
-  public static void main(String[] args) {
-    String sampleNoQuotes = "{'version':'1.0','people':[{'name':'john','contact':'+123456','detail':'ignore'},{'name':'sam','contact':'+456789'}]}";
-    String sample = sampleNoQuotes.replace('\'', '"');
-    Json parser = new Json(sample);
-    try {
-      //expects an Object
-      parser.eat('{');
-      if (parser.seekInObject("people")) {
-        parser.eat('['); //people is an array
-        for (Enumeration personEnum = parser.arrayElements(); personEnum.hasMoreElements(); ) {
-          Person person = new Person(parser);
-          System.out.println("" + person);
+    public static void main(String[] args) {
+        String sampleNoQuotes = "{'version':'1.0','people':[{'name':'john','contact':'+123456','detail':'ignore'},{'name':'sam','contact':'+456789'}]}";
+        String sample = sampleNoQuotes.replace('\'', '"');
+        Json parser = new Json(sample);
+        try {
+            //expects an Object
+            parser.eat('{');
+            if (parser.seekInObject("people")) {
+                parser.eat('['); //people is an array
+                for (Enumeration personEnum = parser.arrayElements(); personEnum.hasMoreElements(); ) {
+                    Person person = new Person(parser);
+                    System.out.println("" + person);
+                }
+            }
+        } catch (FormatException e) {
+            System.out.println("" + e);
+        } catch (SyntaxException e) {
+            System.out.println("syntax " + e);
         }
-      }
-    } catch (FormatException e) {
-      System.out.println("" + e);
-    } catch (SyntaxException e) {
-      System.out.println("syntax " + e);
     }
-  }
 }
 
 class Person {
-  String name;
-  String contact;
-
-  Person(Json parser) throws FormatException {
-    parser.eat('{'); //person is an object
-    for (Enumeration field = parser.objectElements(); field.hasMoreElements(); ) {
-      parser.eat(Json.KEY);
-      String key = parser.getString();
-      if (key.equals("name")) {
-        parser.eat(Json.STRING);
-        name = parser.getString();
-      } else if (key.equals("contact")) {
-        contact = parser.getStringValue();
-      }
+    String name;
+    String contact;
+    
+    Person(Json parser) throws FormatException {
+        parser.eat('{'); //person is an object
+        for (Enumeration field = parser.objectElements(); field.hasMoreElements(); ) {
+            parser.eat(Json.KEY);
+            String key = parser.getString();
+            if (key.equals("name")) {
+                parser.eat(Json.STRING);
+                name = parser.getString();
+            } else if (key.equals("contact")) {
+                contact = parser.getStringValue();
+            }
+        }
     }
-  }
   
-  public String toString() {
-    return "name: " + name + "; contact: " + contact;
-  }
+    public String toString() {
+        return "name: " + name + "; contact: " + contact;
+    }
 }

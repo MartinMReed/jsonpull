@@ -21,7 +21,7 @@ package org.jsonpull;
  * E.g. the user expected a String, but it was an Array.
  */
 public class FormatException extends Exception {
-  FormatException(String detail) {
-    super(detail);
-  }
+    FormatException(String detail) {
+        super(detail);
+    }
 }

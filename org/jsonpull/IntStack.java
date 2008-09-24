@@ -23,32 +23,32 @@ package org.jsonpull;
  * Only used internally by Json.
  */
 class IntStack {
-  int[] values = null;
-  int allocSize;
-  int mSize;
+    int[] values = null;
+    int allocSize;
+    int mSize;
 
-  IntStack() {
-    allocSize = 32;
-    values = new int[allocSize];
-    mSize = 0;
-  }
-
-  int pop() {
-    return values[--mSize];
-  }
-
-  void push(int value) {
-    if (mSize == allocSize) {
-      int newSize = allocSize << 1;
-      int[] newValues = new int[newSize];
-      System.arraycopy(values, 0, newValues, 0, mSize);
-      values    = newValues;
-      allocSize = newSize;
+    IntStack() {
+        allocSize = 32;
+        values = new int[allocSize];
+        mSize = 0;
     }
-    values[mSize++] = value;
-  }
 
-  int size() {
-    return mSize;
-  }
+    int pop() {
+        return values[--mSize];
+    }
+
+    void push(int value) {
+        if (mSize == allocSize) {
+            int newSize = allocSize << 1;
+            int[] newValues = new int[newSize];
+            System.arraycopy(values, 0, newValues, 0, mSize);
+            values    = newValues;
+            allocSize = newSize;
+        }
+        values[mSize++] = value;
+    }
+
+    int size() {
+        return mSize;
+    }
 }
