@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.jsonpull;
+package org.jsonpull;
 
 import java.util.Enumeration;
 

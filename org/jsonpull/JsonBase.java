@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.google.jsonpull;
+package org.jsonpull;
 
 /**
  * Json-pull is an easy to use and efficient (memory, CPU) way of parsing JSON.

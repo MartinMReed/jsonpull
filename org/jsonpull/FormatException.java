@@ -14,13 +14,14 @@
  * limitations under the License.
  */
 
-package com.google.jsonpull;
+package org.jsonpull;
 
 /**
- * Invalid JSON syntax. E.g. {"foo"}
+ * The *user* assumption about the schema of the JSON data was violated.
+ * E.g. the user expected a String, but it was an Array.
  */
-public class SyntaxException extends Exception {
-  SyntaxException(String detail) {
+public class FormatException extends Exception {
+  FormatException(String detail) {
     super(detail);
   }
 }
