@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2007 Google Inc.
+ * Copyright (c) 2008-2010 Metova, Inc.
+ * Copyright (c) 2007 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,42 +14,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.jsonpull;
+package com.google.jsonpull;
 
 /**
- * A simple stack of integers.
- * Avoids the object creation Integer(value) that would happen
+ * A simple stack of integers which avoids the object creation Integer(value) that would happen
  * if using java.util.Stack or java.util.Vector.
- * Only used internally by Json.
  */
-class IntStack {
+final class StateStack {
+
     int[] values = null;
     int allocSize;
     int mSize;
 
-    IntStack() {
+    public StateStack() {
+
         allocSize = 32;
         values = new int[allocSize];
         mSize = 0;
     }
 
-    int pop() {
+    public int pop() {
+
         return values[--mSize];
     }
 
-    void push(int value) {
-        if (mSize == allocSize) {
+    public void push( int value ) {
+
+        if ( mSize == allocSize ) {
+
             int newSize = allocSize << 1;
             int[] newValues = new int[newSize];
-            System.arraycopy(values, 0, newValues, 0, mSize);
-            values    = newValues;
+            System.arraycopy( values, 0, newValues, 0, mSize );
+            values = newValues;
             allocSize = newSize;
         }
+
         values[mSize++] = value;
     }
 
-    int size() {
+    public int size() {
+
         return mSize;
     }
 }

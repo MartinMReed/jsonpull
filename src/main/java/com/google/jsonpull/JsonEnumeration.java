@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2007 Google Inc.
+ * Copyright (c) 2008-2010 Metova, Inc.
+ * Copyright (c) 2007 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,36 +14,48 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package com.google.jsonpull;
 
-package org.jsonpull;
+final class JsonEnumeration implements java.util.Enumeration {
 
-class JsonEnumeration implements java.util.Enumeration {
     private Json parser;
     private int terminator;
     private int level;
 
-    JsonEnumeration(Json parser, int level, int terminator) {
-        this.parser     = parser;
-        this.level      = level;
+    public JsonEnumeration(Json parser, int level) {
+
+        this( parser, level, -1 );
+    }
+
+    public JsonEnumeration(Json parser, int level, int terminator) {
+
+        this.parser = parser;
+        this.level = level;
         this.terminator = terminator;
     }
 
     public boolean hasMoreElements() {
-        //int event = parser.next(level);
-        //return event != terminator;
-        
-        parser.seekLevel(level);
-        boolean hasMore = parser.peekNext() != terminator;
-        if (!hasMore) {
+
+        if ( terminator != -1 ) {
+
+            parser.seekLevel( level );
+
+            if ( parser.nextValue() != terminator ) {
+
+                return true;
+            }
+
             parser.next();
         }
-        return hasMore;
+
+        return false;
     }
 
     /**
      * Only neeed to conform to Enumeration interface, otherwise not useful.
      */
     public Object nextElement() {
-        return new Integer(parser.next());
+
+        return new Integer( parser.next() );
     }
 }
